@@ -3,8 +3,9 @@
     <div>
       <h1 class="text-3xl font-bold text-white mb-6">Stats</h1>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <StatCard title="Tiempo Total de Práctica" :value="stats.totalPracticeTime" unit="horas" />
+        <StatCard title="Tiempo Total de Videos" :value="stats.totalPracticeTime" unit="horas" />
         <StatCard title="Canciones Aprendidas" :value="stats.songsLearned" unit="canciones" />
+        <StatCard title="Total de Videos" :value="stats.totalVideos" unit="videos" />
         <StatCard title="Duración Media de Sesión" :value="stats.averageSessionLength" unit="minutos" />
         <StatCard title="Racha más Larga" :value="stats.longestStreak" unit="días" />
       </div>
@@ -39,6 +40,7 @@
   const stats = ref({
     totalPracticeTime: 25,
     songsLearned: 15,
+    totalVideos: 4,
     averageSessionLength: 30,
     longestStreak: 7
   })
