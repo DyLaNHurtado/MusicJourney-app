@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import Practice from "./views/Practice.vue";
 import Dashboard from "./views/Dashboard.vue";
 import Archievements from "./views/Archievements.vue";
 import Songs from "./views/Songs.vue";
@@ -11,6 +12,11 @@ const router = createRouter({
   routes: [
     {
       path: "/",
+      name: "practice",
+      component: Practice,
+    },
+    {
+      path: "/dashboard",
       name: "dashboard",
       component: Dashboard,
     },

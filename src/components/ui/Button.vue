@@ -19,7 +19,7 @@
     variant: {
       type: String,
       default: 'primary',
-      validator: (value) => ['primary', 'secondary', 'danger'].includes(value)
+      validator: (value) => ['primary', 'secondary', 'danger', 'basic'].includes(value)
     },
     size: {
       type: String,
@@ -35,7 +35,8 @@
   const variantClasses = {
     primary: 'bg-green-500 text-white hover:bg-green-600',
     secondary: 'bg-yellow-500 text-gray-900 hover:bg-yellow-600',
-    danger: 'bg-red-500 text-white hover:bg-red-600'
+    danger: 'bg-red-500 text-white hover:bg-red-600',
+    basic: 'bg-gray-700 text-gray-100 hover:bg-gray-600',
   }
   
   const sizeClasses = {

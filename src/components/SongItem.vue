@@ -1,9 +1,9 @@
 <template>
   <div 
-    class="bg-gray-800 rounded-lg p-4 transition-all duration-300 cursor-pointer shadow-md"
+    class="bg-gray-800 rounded-lg transition-all duration-300  shadow-md"
     :class="{ 'ring-2 ring-green-600': isExpanded }"
   >
-    <div @click="toggleExpand" class="flex items-center justify-between">
+    <div @click="toggleExpand" class="flex items-center justify-between p-4 shadow-md cursor-pointer">
       <div class="flex items-center space-x-4">
         <div class="relative w-16 h-16 rounded-md overflow-hidden bg-gray-700 flex items-center justify-center">
           <img 
@@ -17,8 +17,8 @@
           </svg>
         </div>
         <div class="flex-grow">
-          <h3 class="text-lg font-semibold text-white text-start" @click.stop="startEditing('title')" @mouseenter="startEditing('title')" @mouseleave="isEditing.title = false">
             <!-- TODO: Hacer que si se hace focus en uno aunque hagas mouseleave no se transforme en span porque queda raro -->
+            <h3 class="text-lg font-semibold text-white text-start" @click.stop="startEditing('title')" @mouseenter="startEditing('title')" @mouseleave="isEditing.title = false">
             <transition name="fade" mode="out-in">
             <span v-if="!isEditing.title">{{ editedSong.title }}</span>
             <input
@@ -31,6 +31,8 @@
             >
             </transition>
           </h3>
+           
+
           <p class="text-sm text-gray-400 text-start"  @click.stop="startEditing('artist')" @mouseenter="startEditing('artist')"  @mouseleave="isEditing.artist = false">
             <transition name="fade" mode="out-in">
             <span v-if="!isEditing.artist">{{ editedSong.artist }}</span>
@@ -47,12 +49,15 @@
         </div>
       </div>
       <div class="flex items-center space-x-4">
-        <div v-if="editedSong.practiceTime" class="text-right">
-          <span class="text-sm text-gray-400">Práctica</span>
-          <p class="font-medium text-white">{{ formatTime(editedSong.practiceTime) }}</p>
-        </div>
+        <p  class="text-gray-300">{{ formatTime(editedSong.practiceTime) }}</p>
         <div class="flex items-center space-x-2">
-          <span :class="getstatusIcon(editedSong.status)" class="text-2xl"></span>
+            <!-- Icono aprendida -->
+            <svg v-if="editedSong.status==='learned'" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#34D399"><path d="M7 12.5L10 15.5L17 8.5" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <!-- Icono en proceso -->
+            <svg v-else-if="editedSong.status==='learning'" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#FBBF24"><path d="M12 6L12 12L18 12" stroke="#FBBF24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#FBBF24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <!-- Icono olvidados -->
+            <svg v-else width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#EF4444"><path d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.5 15.5C11.5 15.5 13 13.5 16 13.5C19 13.5 20.5 15.5 20.5 15.5" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 4C3 1.24586 7 1.2458 7 3.99993C7 5.96716 5 5.63927 5 7.99994" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 11.01L5.01 10.9989" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.5 9C17.2239 9 17 8.77614 17 8.5C17 8.22386 17.2239 8 17.5 8C17.7761 8 18 8.22386 18 8.5C18 8.77614 17.7761 9 17.5 9Z" fill="black" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.5 9C10.2239 9 10 8.77614 10 8.5C10 8.22386 10.2239 8 10.5 8C10.7761 8 11 8.22386 11 8.5C11 8.77614 10.7761 9 10.5 9Z" fill="black" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+
           <svg 
             class="w-5 h-5 text-gray-400 transition-transform duration-300"
             :class="{ 'rotate-180': isExpanded }"
@@ -66,10 +71,17 @@
       </div>
     </div>
 
-    <div v-if="isExpanded" class="mt-6 space-y-6">
+    <div v-if="isExpanded" class="mt-6 space-y-6 p-4">
+      <div  class="flex items-center gap-2 justify-between ">
+          <span class="text-gray-100 font-semibold">Tiempo de Práctica:</span>
+          <p class="text-gray-300">{{ formatTime(editedSong.practiceTime) }}</p>
+      </div>
       <div class="flex justify-between items-center">
         <span class="text-gray-100 font-semibold">Estado:</span>
-        <div v-if="editedSong.status === 'forgotten'" >
+
+        <div v-if="editedSong.status === 'forgotten'" class="flex flex-row flex-wrap items-center justify-center gap-2" >
+         <!--  TODO: AÑADIR CUANTO TIEMPO NO LA PRACTICAS EN VEZ DE MUCHO -->
+          <span class="text-gray-300">¡No la practicas desde hace mucho! Recuerdala.</span>
           <span class="py-2 px-4 bg-red-600 text-gray-100 rounded-lg cursor-auto">Olvidada</span>
         </div>
         
@@ -78,17 +90,13 @@
               v-model="editedSong.status"
               @blur="saveEdit('status')"
               class=" py-2 px-4 bg-gray-700 text-gray-100 rounded-lg focus:outline-none focus:ring-2 placeholder-red-300 focus:ring-green-600 cursor-pointer"
-              :class="{ 'bg-yellow-700': editedSong.status === 'learning', 'bg-green-600': editedSong.status === 'learned' }"
+              :class="{ 'bg-yellow-600': editedSong.status === 'learning', 'bg-green-600': editedSong.status === 'learned' }"
             >
               <option class= "bg-gray-700 text-yellow-600 rounded-lg hover:text-yellow-600" value="learning">En progreso</option>
               <option class="py-2 px-4 bg-gray-700 text-green-600 rounded-lg hover:text-green-600" value="learned">Aprendida</option>
             </select>
         </div>
       </div>
-
-      <p v-if="editedSong.status === 'forgotten'" class="text-gray-400">
-          Practicar para que no se te olvide
-      </p>
 
       <div class="space-y-2">
         <h4 class="text-white font-semibold">Notas</h4>
@@ -197,14 +205,6 @@ const removeLink = (index) => {
   saveEdit('links')
 }
 
-const getstatusIcon = (status) => {
-  const icons = {
-    learned: 'text-green-600',
-    learning: 'text-yellow-600',
-    forgotten: 'text-red-600'
-  }
-  return icons[status] || 'text-gray-400'
-}
 
 const formatTime = (minutes) => {
   const hours = Math.floor(minutes / 60)
