@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center space-x-4 w-full bg-gray-800 rounded-lg p-3">
-    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-xl font-bold">
+    <div class="min-w-10 min-h-10 rounded-full bg-gray-700 flex items-center justify-center text-xl font-bold">
         {{ userInitials }}
     </div>
     <div>

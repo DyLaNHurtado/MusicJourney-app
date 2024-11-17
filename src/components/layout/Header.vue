@@ -1,8 +1,8 @@
 <!-- src/components/layout/Header.vue -->
 <template>
     <header class="bg-gray-800 shadow-md">
-      <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center justify-between lg:justify-center p-5">
+      <div class="container mx-auto px-6 py-12">
+        <div class="flex items-center justify-between lg:justify-center">
           <div>
             <h1 class="text-2xl sm:text-3xl font-bold text-white">{{ currentRoute }}</h1>
           </div>
@@ -25,6 +25,8 @@
 
   const currentRoute = computed(() => {
     switch (route.name) {
+      
+      case 'practice': return 'Empieza a practicar hoy'
       case 'dashboard': return 'Vista principal'
       case 'songs': return 'Mis Canciones'
       case 'videos': return 'Mis Videos'

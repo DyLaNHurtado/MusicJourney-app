@@ -78,6 +78,8 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
+.drop { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.7)); }
+
 .btn-primary {
   @apply bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-200;
 }
@@ -133,4 +135,32 @@ body {
   100% {
     transform: scale(1);
   }
+}
+
+@keyframes swing {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(10deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-swing {
+  animation: swing 1s ease-in-out infinite;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-scale {
+  animation: scale 5s infinite;
 }

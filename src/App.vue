@@ -1,6 +1,6 @@
 <!-- src/App.vue -->
 <template>
-  <div class="flex h-screen bg-gray-900 text-gray-100">
+  <div class="min-h-screen min-w-screen flex bg-gray-900 text-gray-100">
     <Sidebar />
     <div class="flex-1 flex flex-col overflow-hidden">
       <Header />
